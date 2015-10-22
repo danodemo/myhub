@@ -30,14 +30,14 @@ module Myhub
 
     post "/issue/reopen/:id" do
       api = Github.new
-      api.reopen_issue(params["id"].to_i)
-      "Cool cool cool"
+      api.openissue(params["id"].to_i)
+      "Good job, you opened it."
     end
 
     post "/issue/close/:id" do
       api = Github.new
-      api.close_issue(params["id"].to_i)
-      "Cool cool cool"
+      api.closeissue(params["id"].to_i)
+      "Cool cool cool, we closed that one."
     end
 
     run! if app_file == $0
