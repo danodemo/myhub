@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>You Have Issues</title>
+    <title>Issue Tracker</title>
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-      <h2>You should probably do something about these...</h2>
+    <h1>You Have Serious Issues</h2>
+    <img src="https://ateachingparent.files.wordpress.com/2015/07/help-me-help-you.gif"/>
       <br>
-      <p>Here are your current issues:</p>
+      <h2>-=HERE ARE YOUR CURRENT ISSUES=-</h2>
       <ul class="issues">
           <% issues.each do |issue| %>
               <li> 
                   <a href="<%= issue[:url] %>">"<%= issue[:title] %>"</a>
-                  <p>Issue status: <%= issue[:state] %></p>
+                  <p>Issue status: <%= issue[:state] %>-</p>
                   <% if issue[:state] == "closed" %>
                     <form action="/issue/reopen/<%= issue[:number] %>" method="post">
-                      <input type="submit" value="Reopen">
+                      <input type="submit" value="Reopen Issue">
                   <% elsif issue[:state] == "open" %>
                     <form action="/issue/close/<%= issue[:number] %>" method="post">
-                      <input type="submit" value="Close">
+                      <input type="submit" value="Close Issue">
                   <% end %>
                       <br>
                       <br>
@@ -27,4 +28,3 @@
           <% end %>
       </ul>
   </body>
-</html>

@@ -6,24 +6,28 @@ module Myhub
     # Your code here too!
     def initialize
       @headers = {
-        "Authorization" => "token #{ENV["AUTH_TOKEN"]}",
-        "User-Agent" => "HTTParty"
+        "Authorization"  => "token #{ENV["AUTH_TOKEN"]}",
+        "User-Agent"     => "HTTParty"
       }
     end
 
-    #get the issues assigned to you
-    def getissues
-      get ("/")
+    #get the issues assigned to you in the TIY organization ONLY!!!
+    def getorgissues
+      self.class.get("/orgs/TIY-ATL-ROR-2015-Sep/issues", headers: @headers, 
+                                                          query: { state: "all" })
     end
 
-    def open_issue
+    #take {issue: "number"} = is and open it
+    def openissue(id)
+      self.class.patch("/repos/TIY-ATL-ROR-2015-Sep/assignments/issues/#{id}", headers: @headers, 
+                                                                              body: { state: "open" }.to_json)
     end
 
-    def close_issues
+    #take {issue: "number"} = is and close it
+    def closeissue(id)
+      self.class.patch("/repos/TIY-ATL-ROR-2015-Sep/assignments/issues/#{id}"), headers: @headers,
+                                                                                body: { state: "closed"}.to_json)
     end
-
-      #take issue id and open it
-      #take issue id and close it
 
   end
 end
