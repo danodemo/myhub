@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>You Have Issues</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+      <h2>You should probably do something about these...</h2>
+      <br>
+      <p>Here are your current issues:</p>
+      <ul class="issues">
+          <% issues.each do |issue| %>
+              <li> 
+                  <a href="<%= issue[:url] %>">"<%= issue[:title] %>"</a>
+                  <p>Issue status: <%= issue[:state] %></p>
+                  <% if issue[:state] == "closed" %>
+                    <form action="/issue/reopen/<%= issue[:number] %>" method="post">
+                      <input type="submit" value="Reopen">
+                  <% elsif issue[:state] == "open" %>
+                    <form action="/issue/close/<%= issue[:number] %>" method="post">
+                      <input type="submit" value="Close">
+                  <% end %>
+                      <br>
+                      <br>
+                  </form>
+              </li>
+          <% end %>
+      </ul>
+  </body>
+</html>
