@@ -25,8 +25,7 @@ module Myhub
 
     #take {issue: "number"} = is and close it
     def closeissue(id)
-      self.class.patch("/repos/TIY-ATL-ROR-2015-Sep/assignments/issues/#{id}"), headers: @headers,
-                                                                                body: { state: "closed"}.to_json)
+      self.class.patch("/repos/TIY-ATL-ROR-2015-Sep/assignments/issues/#{id}", headers: @headers, body: { state: "closed"}.to_json)
     end
 
   end

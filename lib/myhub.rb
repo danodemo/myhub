@@ -1,5 +1,6 @@
 require "sinatra/base"
 require "httparty"
+require "json"
 require "pry"
 
 require "myhub/version"
@@ -12,16 +13,16 @@ module Myhub
     
     get "/" do
       api = Github.new #github.rb starts here
-      issues = api.getissues
+      issues = api.getorgissues
       @issuelist = []
       issues.each do |issue|
-        item = { 
+        issue = { 
                   title: issue["title"], 
                   url: issue["url"],
                   number: issue["number"],
                   state: issue["state"],
                 }
-        @issuelist.push(item)
+        @issuelist.push(issue)
         # binding.pry
       end
       erb :index, locals: { issues: @issuelist }
